@@ -17,7 +17,7 @@ class SignUpSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['id', 'first_name', 'last_name', 'username', 'email', 'password', 'confirm_password', 'email_verified', 'profile_picture', 'subscription_plan', 'accept_terms']
+        fields = ['uuid', 'first_name', 'last_name', 'username', 'email', 'password', 'confirm_password', 'email_verified', 'profile_picture', 'subscription_plan', 'accept_terms']
         extra_kwargs = {
             'password': {'write_only': True},
             
@@ -83,4 +83,4 @@ class UserSerializer(serializers.ModelSerializer):
     profile_picture = serializers.ImageField(required=False)
     class Meta:
         model = User
-        fields = ('username','first_name','last_name' ,'email','profile_picture', 'subscription_plan') 
+        fields = ('uuid','username','first_name','last_name' ,'email','profile_picture', 'subscription_plan','is_staff','is_superuser') 

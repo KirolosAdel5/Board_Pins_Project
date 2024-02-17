@@ -9,6 +9,8 @@ from .views import (
     reset_password,
     APILogoutView,
     set_user_permissions,
+    GoogleLoginRedirectView,
+    GoogleLoginCallbackView
 )
 
 from rest_framework_simplejwt.views import TokenRefreshView
@@ -22,6 +24,9 @@ urlpatterns = [
     path('user/confirm-email/', UserViewSet.as_view({'post': 'confirm_email'}), name='confirm-email'),
     path('user/resend-otp/', UserViewSet.as_view({'post': 'send_reset_otp'}), name='send-reset-otp'),
     path('user/login/', CustomTokenObtainPairView.as_view(), name='user-login'),
+    path("google-login/", GoogleLoginRedirectView.as_view(), name="google_login_redirect"),
+    path("google-callback/", GoogleLoginCallbackView.as_view(), name="google_login_callback"),
+
     path('login/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     
     path('userinfo/', current_user,name='user_info'), 
@@ -33,6 +38,5 @@ urlpatterns = [
     path('user/logout/', APILogoutView.as_view(), name='logout_token'),
 
     path('set-user-permissions/<str:username>/', set_user_permissions, name='set_user_permissions'),
-
 
 ]
